@@ -1,0 +1,38 @@
+Question 5:
+
+The feature that I was assigned was coordinates (196, 197). They were successfully tracked given the default settings. But by experimenting with a window size of 51, the tracking coordinates do change at rate which is smoother and more consistent in both the x and y dimensions. 
+
+Window size of best result: 51
+Gaussian sigma of best result: 1.5
+
+Documenting the (x,y) positions for the features in each frame: 
+
+	When window size = 21, sigma = 1.5:
+
+		Frame  7 tracked: (196.000000000 , 197.000000000)
+		Frame  8 tracked: (193.761746175 , 198.567568922)
+		Frame  9 tracked: (191.758593387 , 200.14807509 )
+		Frame 10 tracked: (189.759019482 , 201.63090987 )
+		Frame 11 tracked: (187.653357915 , 202.841848588)
+		Frame 12 tracked: (185.678225039 , 204.293905707)
+		Frame 13 tracked: (183.731848404 , 205.769131067)
+		Frame 14 tracked: (182.030257305 , 206.76255171 )
+	
+	When window size = 51, sigma = 1.5:
+
+		Frame  7 tracked: (196.000000000 , 197.000000000)
+		Frame  8 tracked: (193.920117729 , 199.036680976)
+		Frame  9 tracked: (191.890033589 , 201.083914056)
+		Frame 10 tracked: (189.870136012 , 203.13115238 )
+		Frame 11 tracked: (187.788893615 , 205.04624184 )
+		Frame 12 tracked: (185.736720657 , 206.910071631)
+		Frame 13 tracked: (183.677484551 , 208.604938144)
+		Frame 14 tracked: (181.604100962 , 209.940746364)
+		
+
+Question 6: 
+
+One area where the Lucas/Kanade method will fail is at boundary edge points. These areas of discontinuity cause the resulting optical flow to be incorrect.When we are computing derivatives in the Lucas/Kanade method, we are computing them using small masks. If the motion is greater than the range captured by the size of the derivative mask, the small masks will not be enough, and may even put the brightness consistency constraint into question. Pyramids may be used to compute large optical flow vectors. The pyramid will take the large motion and reduce it. If the original motion in a 256*256 image spanned 32 pixels, for example,then reducing the image to 128*128 would scale down the motion to span of 16 pixels. Further reductions would reduce 16 to 8, 8 to 4, etc. Once the motion is small enough, the method can be applied more effectively. 
+
+Another area where the Lucas/Kanade method will fail if the pixels in a window do not all move in the same general motion. This is based on one of the assumptions in the method. Also, it might fail when there are bursts of intensity brightness in the 
+image being tracked. Possibly some kind of a flash, or explosion. Finally, another issue that likely has an impact on the success of the Lucas/Kanade method are pixels on the boundary of the actual frame. This is challenging because the neighbourhood of pixels that are found outside of the boundary have to be estimated or dealt with in some way and this could lead to inaccurate results. 
