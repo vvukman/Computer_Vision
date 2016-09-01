@@ -20,7 +20,7 @@ def xderivative(image):
                 else:
                     image_array_copy[row, col] = 0
             else:
-                image_array_copy[row, col] = 256
+                image_array_copy[row, col] = 0
 
     result = Image.fromarray(image_array_copy)
     return result
@@ -42,7 +42,7 @@ def yderivative(image):
                 else:
                     image_array_copy[row, col] = 0
             else:
-                image_array_copy[row, col] = 256
+                image_array_copy[row, col] = 0
 
     result = Image.fromarray(image_array_copy)
     return result
