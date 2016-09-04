@@ -3,14 +3,14 @@ import numpy as np
 import math
 from scipy import signal
 import gaussian_convolution as gc
-import image_derivatives as id 
+import mh_image_derivatives as id 
 
 def marr_hildreth_edge_detector(image, sigma):
     image_array = np.asarray(image)
     # Smooth the image by Gaussian filter
-    gc.gaussconvolve2d(image_array, sigma)
+    smoothed_image_array = gc.gaussconvolve2d(image_array, sigma)
     # Apply Laplacian to smoothed image 
-    laplacian_of_img = laplacian(image_array)
+    laplacian_of_img = laplacian(smoothed_image_array)
     # Find zero crossings
     result = find_zero_crossings(laplacian_of_img)
     return result
@@ -58,9 +58,9 @@ def laplacian(image_array):
     return fxx + fyy
 
 
-image = Image.open('/home/wolfman/Pictures/parthenon.jpg')
+image = Image.open('/.../parthenon.jpg')
 image = image.convert('L')
-result = marr_hildreth_edge_detector(image, 2)
+result = marr_hildreth_edge_detector(image, 0.8)
 result = result.astype('uint8')
 image = Image.fromarray(result)
-image.save('/home/wolfman/Pictures/marr_hildreth_edge_detection_perast_balcony.jpg','JPEG')
+image.save('/.../marr_hildreth_edge_detection_parthenon.jpg','JPEG')
